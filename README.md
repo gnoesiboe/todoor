@@ -1,6 +1,6 @@
 # todoor
 
-Sinple page, javascript todo app that saves it's todo's in local storage. Uses:
+Single page, javascript todo app that saves it's todo's in local storage. Uses:
 
 * require js
 * bootstrap
