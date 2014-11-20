@@ -170,7 +170,6 @@ define([
          * @returns {jQuery}
          */
         render: function () {
-            console.log('render: ' + this._day.getDate().format('L'));
             this._initTodoListItemComponents();
 
             var template = _.template(dayTemplate);
