@@ -12,7 +12,7 @@ Single page, javascript todo app that saves it's todo's in local storage. Uses:
 * jquery
 * jquery ui
 
-# Getting it to work
+## Getting it to work
 
 1. Go to public folder and get the bower dependencies with:
 
