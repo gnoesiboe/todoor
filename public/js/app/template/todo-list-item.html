@@ -1,0 +1,21 @@
+<div class="row <%= todoListItem.isChecked() ? 'is-checked' : '' %>">
+    <div class="col-xs-2">
+        <input type="checkbox"
+               id="item_<%= todoListItem.getUUID() %>"
+               class="js-todo-list-item-checkbox"
+                <%= todoListItem.isChecked() ? 'checked="checked"' : '' %> />
+    </div>
+    <div class="col-xs-24">
+        <label for="item_<%= todoListItem.getUUID() %>" class="truncate">
+            <%= todoListItem.getTitle() %>
+        </label>
+    </div>
+    <div class="col-xs-2">
+        <span class="glyphicon glyphicon-align-justify todo-list-item-drag-handle js-todo-list-item-drag-handle"><!-- --></span>
+    </div>
+    <div class="col-xs-2">
+        <a href="#" class="js-todo-list-item-remove todo-list-item-remove-link">
+            <span class="glyphicon glyphicon-remove"><!-- --></span>
+        </a>
+    </div>
+</div>

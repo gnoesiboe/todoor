@@ -1,0 +1,44 @@
+@import "../variables";
+
+.days {
+    height: 50%;
+
+    .days-day {
+        &:first-child {
+            border-left: none;
+        }
+    }
+}
+
+.days-day {
+    height: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+
+    .day-title {
+        display: block;
+        line-height: 40px;
+        padding: 0 10px;
+        background: $color-1;
+        color: #fff;
+        margin: 10px 0;
+    }
+
+    .body {
+        margin: 10px;
+    }
+
+    &.is-active {
+        background: #efefef;
+    }
+
+    &.is-selected {
+        border: 1px solid $color-2;
+    }
+
+    &.is-current {
+        .day-title {
+            color: #2ABF6B;
+        }
+    }
+}
