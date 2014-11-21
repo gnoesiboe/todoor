@@ -4,8 +4,9 @@ define([
     'app/service/eventDispatcher',
     'moment',
     'underscore',
-    'app/collection'
-], function (TodoListItem, store, eventDispatcher, moment, _, Collection) {
+    'app/collection',
+    'app/service/logger'
+], function (TodoListItem, store, eventDispatcher, moment, _, Collection, logger) {
 
     /**
      * @type {string}
@@ -141,11 +142,14 @@ define([
 
         /**
          * @param {Object} todoListItem
+         * @param {Boolean} triggerEvent
          *
          * @returns {Object}
          */
-        update: function (todoListItem) {
+        update: function (todoListItem, triggerEvent) {
             var uuid = todoListItem.getUUID();
+
+            triggerEvent = _.isBoolean(triggerEvent) ? triggerEvent : true;
 
             var currentData = this.getAll().extractData(),
                 foundAtIndex = null;
@@ -165,10 +169,14 @@ define([
 
             store.set(NAMESPACE, currentData);
 
-            eventDispatcher.trigger('repository.todo_list_item.persisted', {
-                uuid: uuid,
-                date: todoListItem.getDate().format('YYYY-MM-DD')
-            });
+            if (triggerEvent === true) {
+                eventDispatcher.trigger('repository.todo_list_item.persisted', {
+                    uuid: uuid,
+                    date: todoListItem.getDate().format('YYYY-MM-DD')
+                });
+            }
+
+            logger.log('TodoListItem \'' + todoListItem.getUUID() + '\' persisted', ['todoListItem']);
 
             return this;
         }

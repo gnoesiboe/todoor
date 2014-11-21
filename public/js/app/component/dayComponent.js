@@ -109,6 +109,7 @@ define([
             var todoListItem = todoListItemRepository.getOneByUUID(data.uuid);
 
             this._todoListItemComponents.push(new todoListItemComponent(todoListItem));
+            this.render();
         },
 
         /**
@@ -170,6 +171,8 @@ define([
          * @returns {jQuery}
          */
         render: function () {
+            logger.log('Render ' + this._day.getDate().format('L'), ['dayComponent']);
+
             this._initTodoListItemComponents();
 
             var template = _.template(dayTemplate);
@@ -229,6 +232,8 @@ define([
          * @private
          */
         _onSortingDone: function () {
+            logger.log('Sorting done. Need to update: ' + this._day.getDate().format('L'), ['dayComponent']);
+
             this._persistOrderOfTodoListItems();
         },
 
@@ -259,7 +264,9 @@ define([
                 todoListItem.setRank(index);
                 todoListItem.setDate(self._day.getDate());
 
-                todoListItemRepository.update(todoListItem);
+                // make sure the 'repository.todo_list_item.persisted' event is not triggered
+                // as that would render components to many times and results in double items..
+                todoListItemRepository.update(todoListItem, false);
             });
         },
 
