@@ -12,7 +12,7 @@ define([
         mousetrap.bind(['up'], _onKeyToAbove);
         mousetrap.bind(['down'], _onKeyToBelow);
         mousetrap.bind('escape', _onKeyEscape);
-        mousetrap.bind('n', _onKeyAddTodoItem);
+        mousetrap.bind(['n', 'c'], _onKeyAddTodoItem);
     };
 
     /**
