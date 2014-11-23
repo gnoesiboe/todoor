@@ -16,7 +16,7 @@
 }
 
 .todo-list-item {
-    &.is-checked {
+    .is-checked {
         label {
             color: #aaa;
             text-decoration: line-through;

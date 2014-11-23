@@ -2,8 +2,8 @@
     <div class="col-xs-2">
         <input type="checkbox"
                id="item_<%= todoListItem.getUUID() %>"
-               class="js-todo-list-item-checkbox"
-                <%= todoListItem.isChecked() ? 'checked="checked"' : '' %> />
+               <%= todoListItem.isChecked() ? 'checked="checked"' : '' %>
+               class="js-todo-list-item-checkbox" />
     </div>
     <div class="col-xs-24">
         <label for="item_<%= todoListItem.getUUID() %>"

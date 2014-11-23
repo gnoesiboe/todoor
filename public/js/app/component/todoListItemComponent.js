@@ -68,6 +68,14 @@ define([
                     }
                 });
             });
+
+            this._$el.find('.js-todo-list-item-checkbox').on('change', $.proxy(this._onCheckboxChange, this));
+        },
+
+        _onCheckboxChange: function (e) {
+            this._todoListItem.setChecked(this._todoListItem.isChecked() !== true);
+
+            todoListItemRepository.update(this._todoListItem);
         }
     });
 

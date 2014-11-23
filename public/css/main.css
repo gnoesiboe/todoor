@@ -6310,7 +6310,7 @@ body {
   display: block;
   height: 20px; }
 
-.todo-list-item.is-checked label {
+.todo-list-item .is-checked label {
   color: #aaa;
   text-decoration: line-through; }
 .todo-list-item .todo-list-item-remove-link {
