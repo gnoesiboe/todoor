@@ -3,8 +3,8 @@ define([
     'text!app/template/todo-list-item.html',
     'jquery',
     'app/view',
-    'app/service/eventDispatcher'
-], function (_, todoListItemTemplate, $, BaseView, eventDispatcher) {
+    'app/repository/todoListItemRepository'
+], function (_, todoListItemTemplate, $, BaseView, todoListItemRepository) {
 
     /**
      * @param {Object} todoListItem
@@ -68,9 +68,7 @@ define([
         _onRemoveClick: function (event) {
             event.preventDefault();
 
-            eventDispatcher.trigger('todo_list_item.remove_click', {
-                uuid: this._todoListItem.getUUID()
-            });
+            todoListItemRepository.remove(this._todoListItem);
         },
     });
 

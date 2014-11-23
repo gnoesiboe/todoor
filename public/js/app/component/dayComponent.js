@@ -59,28 +59,25 @@ define([
             logger.log('Init day component for date: ' + this._day.getDate().format('L'), ['day']);
 
             eventDispatcher.register('repository.todo_list_item.persisted', this._onTodoListItemPersisted, this);
-            eventDispatcher.register('todo_list_item.remove_click', this._onTodoListItemRemoveClick, this);
+            eventDispatcher.register('repository.todo_list_item.removed', this._onTodoListItemRemoved, this);
         },
 
-        /**
-         * @param {Object} data
-         *
-         * @private
-         */
-        _onTodoListItemRemoveClick: function (data) {
+        _onTodoListItemRemoved: function (data) {
             if (typeof data.uuid === 'undefined') {
-                logger.error('no uuid found. We need it to be able to see what to delete');
+                logger.error('no uuid key found to get todo list item with');
 
                 return;
             }
 
-            var uuid = data.uuid;
+            if (typeof data.date === 'undefined') {
+                logger.error('no date key found to define date with');
 
-            if (this._day.hasItem(uuid) === false) {
                 return;
             }
 
-            todoListItemRepository.remove(uuid);
+            if (data.date !== this._day.getDate().format('YYYY-MM-DD')) {
+                return;
+            }
 
             this.render();
         },
@@ -184,10 +181,18 @@ define([
             }));
 
             this._renderTodoListItemComponents();
+            this._initTooltip();
 
             this._initComponentEventListeners();
 
             return this._$el;
+        },
+
+        /**
+         * @private
+         */
+        _initTooltip: function () {
+            this._$el.find('[data-toggle="tooltip"]').tooltip();
         },
 
         /**

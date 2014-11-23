@@ -103,18 +103,83 @@ define([
         },
 
         /**
-         * @param {String} uuid
+         * @param {Object} todoListItem
          *
          * @returns {boolean}
          */
-        remove: function (uuid) {
-            if (store.has(uuid) === true) {
-                store.remove(uuid);
+        remove: function (todoListItem) {
+            var uuid = todoListItem.getUUID(),
+                currentData = this.getAll().extractData();
 
-                return true;
+            var foundAtIndex = this._getIndexForUUID(uuid);
+
+            if (foundAtIndex === null) {
+                return false;
             }
 
-            return false;
+            currentData.splice(foundAtIndex, 1);
+
+            store.set(NAMESPACE, currentData);
+
+            eventDispatcher.trigger('repository.todo_list_item.removed', {
+                uuid: uuid,
+                date: todoListItem.getDate().format('YYYY-MM-DD')
+            });
+
+            return true;
+        },
+
+        /**
+         * @param {String} uuid
+         *
+         * @returns {Number|Null}
+         *
+         * @private
+         */
+        _getIndexForUUID: function (uuid) {
+            var currentData = this.getAll().extractData(),
+                foundAtIndex = null;
+
+            for (var i = 0, l = currentData.length; i < l; i++) {
+                if (currentData[i].uuid === uuid) {
+                    foundAtIndex = i;
+                    break;
+                }
+            }
+
+            return foundAtIndex;
+        },
+
+        /**
+         * @param {Object} todoListItem
+         * @param {Boolean} triggerEvent
+         *
+         * @returns {Object}
+         */
+        update: function (todoListItem, triggerEvent) {
+            var uuid = todoListItem.getUUID();
+
+            triggerEvent = _.isBoolean(triggerEvent) ? triggerEvent : true;
+
+            var currentData = this.getAll().extractData(),
+                foundAtIndex = this._getIndexForUUID(uuid);
+
+            if (foundAtIndex === null) {
+                return this.create(todoListItem);
+            }
+
+            currentData[foundAtIndex] = todoListItem.extractData();
+
+            store.set(NAMESPACE, currentData);
+
+            if (triggerEvent === true) {
+                eventDispatcher.trigger('repository.todo_list_item.persisted', {
+                    uuid: uuid,
+                    date: todoListItem.getDate().format('YYYY-MM-DD')
+                });
+            }
+
+            return this;
         },
 
         /**
@@ -136,47 +201,6 @@ define([
                 uuid: uuid,
                 date: todoListItem.getDate().format('YYYY-MM-DD')
             });
-
-            return this;
-        },
-
-        /**
-         * @param {Object} todoListItem
-         * @param {Boolean} triggerEvent
-         *
-         * @returns {Object}
-         */
-        update: function (todoListItem, triggerEvent) {
-            var uuid = todoListItem.getUUID();
-
-            triggerEvent = _.isBoolean(triggerEvent) ? triggerEvent : true;
-
-            var currentData = this.getAll().extractData(),
-                foundAtIndex = null;
-
-            for (var i = 0, l = currentData.length; i < l; i++) {
-                if (currentData[i].uuid === uuid) {
-                    foundAtIndex = i;
-                    break;
-                }
-            }
-
-            if (foundAtIndex === null) {
-                return this.create(todoListItem);
-            }
-
-            currentData[foundAtIndex] = todoListItem.extractData();
-
-            store.set(NAMESPACE, currentData);
-
-            if (triggerEvent === true) {
-                eventDispatcher.trigger('repository.todo_list_item.persisted', {
-                    uuid: uuid,
-                    date: todoListItem.getDate().format('YYYY-MM-DD')
-                });
-            }
-
-            logger.log('TodoListItem \'' + todoListItem.getUUID() + '\' persisted', ['todoListItem']);
 
             return this;
         }

@@ -6,7 +6,11 @@
                 <%= todoListItem.isChecked() ? 'checked="checked"' : '' %> />
     </div>
     <div class="col-xs-24">
-        <label for="item_<%= todoListItem.getUUID() %>" class="truncate">
+        <label for="item_<%= todoListItem.getUUID() %>"
+               data-toggle="tooltip"
+               data-placement="bottom"
+               title="<%= todoListItem.getTitle() %>"
+               class="truncate">
             <%= todoListItem.getTitle() %>
         </label>
     </div>
