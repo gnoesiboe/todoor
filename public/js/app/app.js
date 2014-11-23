@@ -3,14 +3,21 @@ define([
     'app/component/daysComponent',
     'app/service/logger',
     'app/service/keyboardListener',
+    'app/component/listsComponent',
     'bootstrap'
-], function ($, DaysComponent, logger, keyboardListener) {
+], function ($, DaysComponent, logger, keyboardListener, ListsComponent) {
 
     /**
-     * @type {jQuery}
+     * @type {Object}
      * @private
      */
     var _daysComponent = null;
+
+    /**
+     * @type {Object}
+     * @private
+     */
+    var _listsComponent = null;
 
     /**
      * @type {jQuery}
@@ -39,10 +46,15 @@ define([
 
         _daysComponent = new DaysComponent($el);
 
-        var content = _daysComponent
-            .render();
+        _$containerEl.append(_daysComponent.render());
+    };
 
-        _$containerEl.html(content);
+    var _initListsComponent = function () {
+        var $el = $('<div class="row lists" id="js-lists-component"></div>')
+
+        _listsComponent = new ListsComponent($el);
+
+        _$containerEl.append(_listsComponent.render());
     };
 
     return {
@@ -55,6 +67,7 @@ define([
 
             _initContainerEl();
             _initDaysComponent();
+            _initListsComponent();
 
             keyboardListener.init();
         }

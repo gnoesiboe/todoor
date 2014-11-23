@@ -6296,6 +6296,14 @@ body {
   border-top: 1px solid #ddd;
   height: 50%; }
 
+.lists-list .list-title {
+  display: block;
+  line-height: 40px;
+  padding: 0 10px;
+  background: #3E8C60;
+  color: #fff;
+  margin: 10px 0; }
+
 .todo-list {
   padding-left: 0;
   list-style: none;

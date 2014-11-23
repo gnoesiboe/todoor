@@ -135,7 +135,7 @@ define([
             }
 
             //@todo move $el generation to DayComponent? Is this possible?
-            var $el = $('<div class="col-md-6 days-day" id="js-day-' + day.getDate().format('l') + '"></div>');
+            var $el = $('<div class="col-md-6 days-day"></div>');
             var component = new DayComponent($el, day);
 
             if (component.isCurrent() === true) {
