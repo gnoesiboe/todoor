@@ -9,10 +9,10 @@ define([
     var _initEventListeners = function () {
         mousetrap.bind(['left', 'j'], _onKeyToPrevious);
         mousetrap.bind(['right', 'k'], _onKeyToNext);
-        mousetrap.bind(['up', 'p'], _onKeyToAbove);
-        mousetrap.bind(['down', 'n'], _onKeyToBelow);
+        mousetrap.bind(['up'], _onKeyToAbove);
+        mousetrap.bind(['down'], _onKeyToBelow);
         mousetrap.bind('escape', _onKeyEscape);
-        mousetrap.bind('enter', _onKeyAddTodoItem);
+        mousetrap.bind('n', _onKeyAddTodoItem);
     };
 
     /**

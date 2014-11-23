@@ -3,8 +3,9 @@ define([
     'text!app/template/todo-list-item.html',
     'jquery',
     'app/view',
-    'app/repository/todoListItemRepository'
-], function (_, todoListItemTemplate, $, BaseView, todoListItemRepository) {
+    'app/repository/todoListItemRepository',
+    'bootbox'
+], function (_, todoListItemTemplate, $, BaseView, todoListItemRepository, bootbox) {
 
     /**
      * @param {Object} todoListItem
@@ -58,18 +59,16 @@ define([
          * @private
          */
         _initComponentEventListeners: function () {
-            this._$el.find('.js-todo-list-item-remove').on('click', $.proxy(this._onRemoveClick, this));
-        },
+            var self = this;
 
-        /**
-         * @param {Object} event
-         * @private
-         */
-        _onRemoveClick: function (event) {
-            event.preventDefault();
-
-            todoListItemRepository.remove(this._todoListItem);
-        },
+            this._$el.find('.js-todo-list-item-remove').click(function (e) {
+                bootbox.confirm('Are you sure?', function (result) {
+                    if (result === true) {
+                        todoListItemRepository.remove(self._todoListItem);
+                    }
+                });
+            });
+        }
     });
 
     return TodoListItemComponent;

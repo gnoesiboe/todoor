@@ -24,7 +24,8 @@ require.config({
         'bootstrapValidator':   '../bower_components/bootstrapvalidator/dist/js/bootstrapValidator',
         'bootstrapValidatorNL': '../bower_components/bootstrapvalidator/dist/js/language/nl_NL',
         'mousetrap':            '../bower_components/mousetrap/mousetrap.min',
-        "jquery-ui":            '../bower_components/jqueryui/jquery-ui.min'
+        "jquery-ui":            '../bower_components/jqueryui/jquery-ui.min',
+        "bootbox":              '../bower_components/bootbox/bootbox'
     },
 
     config: {

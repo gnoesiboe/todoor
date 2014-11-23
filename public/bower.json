@@ -27,6 +27,7 @@
     "bootstrapvalidator": "~0.5.3",
     "mousetrap": "~1.4.6",
     "jquery": "~2.1.1",
-    "jqueryui": "~1.11.2"
+    "jqueryui": "~1.11.2",
+    "bootbox": "~4.3.0"
   }
 }
