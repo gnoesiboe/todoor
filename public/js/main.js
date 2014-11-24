@@ -9,7 +9,7 @@ require.config({
         'bootstrapValidatorNL': {
             'deps': ['bootstrapValidator']
         },
-        'jquery-ui': {
+        'jquery-ui':            {
             'deps': ['jquery']
         }
     },
@@ -25,7 +25,8 @@ require.config({
         'bootstrapValidatorNL': '../bower_components/bootstrapvalidator/dist/js/language/nl_NL',
         'mousetrap':            '../bower_components/mousetrap/mousetrap.min',
         "jquery-ui":            '../bower_components/jqueryui/jquery-ui.min',
-        "bootbox":              '../bower_components/bootbox/bootbox'
+        "bootbox":              '../bower_components/bootbox/bootbox',
+        "socket-io":            '../bower_components/socket.io-client/socket.io'
     },
 
     config: {

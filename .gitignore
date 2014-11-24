@@ -1,3 +1,4 @@
 .idea
 public/bower_components/*
 public/.sass-cache/*
+node_modules/*

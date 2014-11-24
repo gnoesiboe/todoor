@@ -3,8 +3,9 @@ define([
     'app/component/daysComponent',
     'app/service/logger',
     'app/service/keyboardListener',
+    'app/service/bridge',
     'bootstrap'
-], function ($, DaysComponent, logger, keyboardListener) {
+], function ($, DaysComponent, logger, keyboardListener, bridge) {
 
     /**
      * @type {jQuery}
@@ -45,6 +46,14 @@ define([
         _$containerEl.html(content);
     };
 
+    var _initSynchronisation = function () {
+        bridge.init();
+
+        setInterval(function () {
+            bridge.synchroniseTodoListItems();
+        }, 3000);
+    };
+
     return {
 
         /**
@@ -57,6 +66,8 @@ define([
             _initDaysComponent();
 
             keyboardListener.init();
+
+            _initSynchronisation();
         }
     }
 });

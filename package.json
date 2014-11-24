@@ -1,0 +1,11 @@
+{
+  "name": "todoor",
+  "version": "0.0.1",
+  "description": "Todo app",
+  "dependencies": {
+    "express": "^4.10.2",
+    "socket.io": "^1.2.1",
+    "mysql": "^2.5.3",
+    "express-myconnection": "^1.0.4"
+  }
+}
