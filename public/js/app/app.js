@@ -51,7 +51,7 @@ define([
 
         setInterval(function () {
             bridge.synchroniseTodoListItems();
-        }, 3000);
+        }, 10000);
     };
 
     return {
